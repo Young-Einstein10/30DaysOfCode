@@ -1,0 +1,51 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 20px;
+  background: #e6e6e3;
+}
+
+section.cont {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+div#counter {
+  font-size: 160px;
+}
+
+div button {
+  cursor: pointer;
+  padding: 30px 100px;
+  background-color: cornflowerblue;
+  border-radius: 50px;
+  border: solid 1px;
+  font-size: 20px;
+  margin: 20px;
+}
+
+.red {
+  color: red;
+}
+
+.green {
+  color: green;
+}
+
+@media screen and (max-width: 768px) {
+  div {
+    text-align: center;
+  }
+
+  div button {
+    padding: 20px 40px;
+  }
+}
