@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;300;400&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 17px;
+  background: #e2f3f5;
+  height: 100vh;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+h1 {
+  margin: 40px 0;
+  text-align: center;
+}
+
+section {
+  background: #303a52;
+  max-width: 500px;
+  width: 100%;
+  border-radius: 3px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  width: 100%;
+}
+
+form label {
+  display: grid;
+  margin: 20px;
+}
+
+form label input {
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 3px;
+  border: 0;
+
+}
+
+form button {
+  padding: 15px 25px;
+  border-radius: 5px;
+  margin: 20px;
+  border: 0;
+  cursor: pointer;
+  font-size: 18x;
+  background: #46c3db;
+  outline: none;
+}
+
+div.result {
+  margin: 40px 0 20px 0;
+  text-align: center;
+}
+
+div.links {
+  margin: 0 20px;
+}
+
+div.links span {
+  padding: 15px;
+  width: 200px;
+  text-align: center;
+  display: inline-block;
+  cursor: pointer;
+}
+
+div.links span:hover {
+  background-color: #46c3db;
+}
+
+.metric {
+  display: none;
+}
+
+.bmi {
+  font-size: 25px;
+}
