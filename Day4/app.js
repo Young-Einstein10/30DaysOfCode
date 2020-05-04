@@ -48,4 +48,4 @@ const populateUI = () => {
   author.innerHTML = `- ${arr.author}`;
 }
 
-setInterval(populateUI, 2000);
+setInterval(populateUI, 30000);
