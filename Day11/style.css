@@ -1,0 +1,56 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #1f1f1f;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  background: #6c5fa7;
+  height: 100vh;
+  width: 100%;
+}
+
+section.userData {
+  display: grid;
+  grid-gap: 10px;
+}
+
+div.userProfile {
+  margin: 10px;
+  padding: 10px;
+  background: #dbd114;
+  max-width: 300px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+div.userProfile p {
+  margin: 5px 0;
+}
+
+img {
+  max-width: 300px;
+  display: block;
+  height: auto;
+}
+
+@media (min-width: 600px) {
+  section.userData {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  section.userData {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  section.userData {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
