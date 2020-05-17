@@ -18,7 +18,13 @@ async function searchUser(e) {
   try {
     const response = await fetch(`https://restcountries.eu/rest/v2/name/${countryName}`);
     const data = await response.json();
-    populateUI(data[0]);
+
+    // Update UI only when Country is Found, else Update UI has ```Country Not Found```
+    if (data.length) {
+      populateUI(data[0]);
+    } else if (data.status == 404) {
+      country.innerHTML = `Country ${data.message}`
+    }
     console.log(data);
     // Clear Form Input
     form.reset();
@@ -42,13 +48,38 @@ function populateUI(data) {
         <p class="subregion"><strong>Sub-region: </strong>${subregion}</p>
         <p class="call-code"><strong>Call Code: </strong>+${callingCodes[0]}</p>
         <p class="language"><strong>Language: </strong> ${languages[0].name}</p>
-        <p class="population"><strong>Population:</strong>${population}</p>
-        <p class="area"><strong>Area: </strong> ${area}</p>
+        <p class="population"><strong>Population: </strong>${formatNum(population)}</p>
+        <p class="area"><strong>Area: </strong> ${area}KM²</p>
         <p class="currency"><strong>Currency: </strong>${currencies[0].name} ${currencies[0].symbol}</p>
         <p class="world-bank-gini"><strong>World Bank Gini: </strong>${gini}%</p>
-        <p class="lat_lng"><strong>Lat Long: </strong>Lat: ${latlng[0]}, Lng: ${latlng[1]}</p>
+        <p class="lat_lng"><strong>Lat Long: </strong>Lat: ${latlng[0]}°, Lng: ${latlng[1]}°</p>
       </div>
   `;
 
   country.style.display = 'block';
+}
+
+function formatNum(x) {
+	if(isNaN(x)) return x;
+
+	if(x < 9999) {
+		return x;
+	}
+
+	if(x < 1000000) {
+		return Math.round(x/1000) + "K";
+	}
+	if( x < 10000000) {
+		return (x/1000000).toFixed(2) + "M";
+	}
+
+	if(x < 1000000000) {
+		return Math.round((x/1000000)) + "M";
+	}
+
+	if(x < 1000000000000) {
+		return Math.round((x/1000000000)) + "B";
+	}
+
+	return "1T+";
 }
