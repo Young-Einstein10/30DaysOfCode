@@ -61,7 +61,7 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/ad
 
 ### Deployment
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+Project is Deployed [here](https://naija-news-7fa3d.firebaseapp.com/)
 
 ### `yarn build` fails to minify
 
