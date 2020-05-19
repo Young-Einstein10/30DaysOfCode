@@ -9,14 +9,14 @@ const Dashboard = () => {
   const [searchInput, setsearchInput] = useState('');
   const [feedError, setFeedError] = useState(null);
 
-  const url = 'https://newsapi.org/v2/top-headlines?country=ng&pageSize=90&apiKey=7e880dff532742e38183bea3a25100bb';
+  const url = 'https://newsapi.org/v2/top-headlines?country=ng&pageSize=60&apiKey=7e880dff532742e38183bea3a25100bb';
 
   const searchUrl = `https://newsapi.org/v2/everything?q=${searchInput}&apiKey=7e880dff532742e38183bea3a25100bb`;
 
 
   const handleFormSubmit = async e => {
     e.preventDefault();
-
+    setisLoading(true)
     try {
       const response = await fetch(searchUrl);
       const data = await response.json()
@@ -39,7 +39,7 @@ const Dashboard = () => {
       try {
         const response = await fetch(url);
         const data = await response.json()
-        console.log(data);
+        // console.log(data);
         if (data.status === 'ok') {
           setisLoading(false)
           setFeeds(data.articles)
@@ -59,8 +59,8 @@ const Dashboard = () => {
       const { source: { name }, title, description, url, urlToImage, publishedAt, } = feed;
       return (
         <article className="article" key={uuid()}>
-          <a href={url} className="image col-5" style={{backgroundImage: `url(${urlToImage})`}}></a>
-          <a href={url} className="article-details col-7">
+          <a href={url} target="_blank" rel="noopener noreferrer" className="image col-5" style={{backgroundImage: `url(${urlToImage})`}}></a>
+          <a href={url} target="_blank" rel="noopener noreferrer" className="article-details col-7">
             <h2>{title}</h2>
             <p>{description}</p>
             <p>
@@ -72,12 +72,12 @@ const Dashboard = () => {
       )
     })
   ) : (
-    <p>No Feeds available</p>
+    <p>No News available</p>
   );
 
   return (
     <div className="container">
-      {/* <form action="#" onSubmit={handleFormSubmit}>
+      <form action="#" onSubmit={handleFormSubmit}>
         <label htmlFor="searchInput">
           Enter a Topic to Search:
           <input 
@@ -90,7 +90,8 @@ const Dashboard = () => {
           />
         </label>
         <button>Search</button>
-      </form> */}
+      </form>
+
       <div className="row">
         {feedError ? <p>{feedError}</p> : null}
         {isLoading ? <Spinner /> : FeedList}
