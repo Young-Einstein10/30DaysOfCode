@@ -44,10 +44,12 @@ const Dashboard = () => {
           setisLoading(false)
           setFeeds(data.articles)
         } else if (data.status === 'error') {
+          setisLoading(false);
           setFeedError(data.message)
         }
       } catch (error) {
         console.log(error)
+        setisLoading(false);
         setFeedError(error.message)
       }
     }
@@ -96,6 +98,9 @@ const Dashboard = () => {
         {feedError ? <p>{feedError}</p> : null}
         {isLoading ? <Spinner /> : FeedList}
       </div>
+      {/* <footer>
+        Built by <a href="">Young-Einstein10</a>
+      </footer> */}
     </div>
   )
 }

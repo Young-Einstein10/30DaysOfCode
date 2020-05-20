@@ -1,7 +1,8 @@
 import React from 'react'
-import Toggler from './Toggler/Toggler'
+import Sun from '../assets/sun.svg';
+import Moon from '../assets/half-moon.svg';
 
-const Navbar = ({ onToggle }) => {
+const Navbar = ({ onToggle, theme }) => {
   return (
     <nav className="">
       <div className="container">
@@ -9,7 +10,10 @@ const Navbar = ({ onToggle }) => {
           <p className="latest-news">
             Latest News Across Nigeria
           </p>
-        <Toggler handleToggle={onToggle} />
+        {/* <Toggler handleToggle={onToggle} /> */}
+        <button onClick={onToggle}>
+          {theme === 'light' ? <img src={Sun} alt="Toggle Icon" /> : <img src={Moon} alt="Toggle Icon" />}
+        </button>
       </div>
       
     </nav>
