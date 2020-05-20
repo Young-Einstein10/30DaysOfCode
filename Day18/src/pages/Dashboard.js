@@ -23,13 +23,18 @@ const Dashboard = () => {
       console.log(data);
       if (data.status === 'ok') {
           setisLoading(false)
+          setsearchInput('');
           setFeeds(data.articles)
         } else if (data.status === 'error') {
+          setisLoading(false);
+          setsearchInput('');
           setFeedError(data.message)
         }
     } catch (error) {
       console.log(error)
-      setFeedError(error.message)
+      setisLoading(false);
+      setsearchInput('');
+      setFeedError(error.message);
 
     }
   }
@@ -56,7 +61,7 @@ const Dashboard = () => {
     fetchData()
   }, []);
 
-    const FeedList = feeds.length ? (
+    const FeedList = feeds.length !== 0 && (
     feeds.map((feed) => {
       const { source: { name }, title, description, url, urlToImage, publishedAt, } = feed;
       return (
@@ -73,8 +78,6 @@ const Dashboard = () => {
         </article>
       )
     })
-  ) : (
-    <p>No News available</p>
   );
 
   return (
@@ -91,7 +94,7 @@ const Dashboard = () => {
             required
           />
         </label>
-        <button>Search</button>
+        <button className="search">Search</button>
       </form>
 
       <div className="row">

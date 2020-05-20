@@ -11,7 +11,7 @@ const Navbar = ({ onToggle, theme }) => {
             Latest News Across Nigeria
           </p>
         {/* <Toggler handleToggle={onToggle} /> */}
-        <button onClick={onToggle}>
+        <button className="button" onClick={onToggle}>
           {theme === 'light' ? <img src={Sun} alt="Toggle Icon" /> : <img src={Moon} alt="Toggle Icon" />}
         </button>
       </div>

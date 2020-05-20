@@ -86,7 +86,7 @@ form input {
   margin-left: 2rem;
 }
 
-form button {
+form button.search {
   margin-left: 2rem;
   padding: 2rem 3.5rem;
   border-radius: 5rem;
@@ -155,13 +155,13 @@ a {
   margin-top: 5rem;
 }
 
-button {
+.button {
   cursor: pointer;
   background: none;
   border: none;
 }
 
-button img {
+.button img {
   width: 25px;
   height: 25px;
 }
@@ -172,6 +172,56 @@ button img {
     border-top-left-radius: .7rem;
     border-top-right-radius: .7rem;
     border-bottom-left-radius: 0;
+  }
+
+  form {
+    margin: 4rem 0;
+    display: flex;
+    align-items: center;
+  }
+
+  form label {
+    font-size: 2rem;
+  }
+
+  form label input {
+    padding: 1.2rem 0;
+    width: 200px;
+  }
+
+  form button.search {
+    padding: 1.2rem 0;
+    width: 80px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .row {
+    padding: 2rem;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 3rem 0;
+  }
+
+  form label {
+    font-size: 1.8rem;
+  }
+
+  form label input {
+    padding: 1.3rem;
+    width: 200px;
+  }
+
+  form button.search {
+    width: 100px;
+    padding: 1.1rem;
+    font-size: 1.1em;
+    margin-top: 1.2rem;
   }
 }
 
@@ -192,10 +242,6 @@ button img {
 
   p.latest-news {
     display: none;
-  }
-
-  .article {
-    margin: 2rem;
   }
 
   .article-details {
