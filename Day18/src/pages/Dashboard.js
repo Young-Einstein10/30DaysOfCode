@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Spinner from '../components/Spinner/Spinner';
 import uuid from 'react-uuid';
 
+const proxy_url = 'https://cors-anywhere.herokuapp.com'
 
 const Dashboard = () => {
   const [isLoading, setisLoading] = useState(true);
@@ -9,9 +10,9 @@ const Dashboard = () => {
   const [searchInput, setsearchInput] = useState('');
   const [feedError, setFeedError] = useState(null);
 
-  const url = 'https://newsapi.org/v2/top-headlines?country=ng&pageSize=60&apiKey=7e880dff532742e38183bea3a25100bb';
+  const url = `${proxy_url}/https://newsapi.org/v2/top-headlines?country=ng&pageSize=60&apiKey=7e880dff532742e38183bea3a25100bb`;
 
-  const searchUrl = `https://newsapi.org/v2/everything?q=${searchInput}&apiKey=7e880dff532742e38183bea3a25100bb`;
+  const searchUrl = `${proxy_url}/https://newsapi.org/v2/everything?q=${searchInput}&apiKey=7e880dff532742e38183bea3a25100bb`;
 
 
   const handleFormSubmit = async e => {
@@ -20,7 +21,7 @@ const Dashboard = () => {
     try {
       const response = await fetch(searchUrl);
       const data = await response.json()
-      console.log(data);
+      // console.log(data);
       if (data.status === 'ok') {
           setisLoading(false)
           setsearchInput('');
@@ -59,14 +60,14 @@ const Dashboard = () => {
       }
     }
     fetchData()
-  }, []);
+  }, [url]);
 
     const FeedList = feeds.length !== 0 && (
     feeds.map((feed) => {
       const { source: { name }, title, description, url, urlToImage, publishedAt, } = feed;
       return (
         <article className="article" key={uuid()}>
-          <a href={url} target="_blank" rel="noopener noreferrer" className="image col-5" style={{backgroundImage: `url(${urlToImage})`}}></a>
+          <a href={url} target="_blank" rel="noopener noreferrer" className="image col-5" style={{backgroundImage: `url(${urlToImage})`}}>{null}</a>
           <a href={url} target="_blank" rel="noopener noreferrer" className="article-details col-7">
             <h2>{title}</h2>
             <p>{description}</p>
