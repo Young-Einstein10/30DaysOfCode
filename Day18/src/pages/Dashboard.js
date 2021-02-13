@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Spinner from '../components/Spinner/Spinner';
 import uuid from 'react-uuid';
 
-const proxy_url = 'https://cors-anywhere.herokuapp.com'
 
 const Dashboard = () => {
   const [isLoading, setisLoading] = useState(true);
@@ -10,9 +9,9 @@ const Dashboard = () => {
   const [searchInput, setsearchInput] = useState('');
   const [feedError, setFeedError] = useState(null);
 
-  const url = `${proxy_url}/https://newsapi.org/v2/top-headlines?country=ng&pageSize=60&apiKey=7e880dff532742e38183bea3a25100bb`;
+  const url = `https://newsapi.org/v2/top-headlines?country=ng&pageSize=100&apiKey=7e880dff532742e38183bea3a25100bb`;
 
-  const searchUrl = `${proxy_url}/https://newsapi.org/v2/everything?q=${searchInput}&apiKey=7e880dff532742e38183bea3a25100bb`;
+  const searchUrl = `https://newsapi.org/v2/everything?q=${searchInput}&pageSize=100&apiKey=7e880dff532742e38183bea3a25100bb`;
 
 
   const handleFormSubmit = async e => {
@@ -21,7 +20,7 @@ const Dashboard = () => {
     try {
       const response = await fetch(searchUrl);
       const data = await response.json()
-      // console.log(data);
+      console.log(data);
       if (data.status === 'ok') {
           setisLoading(false)
           setsearchInput('');
@@ -73,7 +72,7 @@ const Dashboard = () => {
             <p>{description}</p>
             <p>
               <span>{name}</span>
-              <span>{publishedAt}</span>
+              <span>{new Date(publishedAt).toLocaleString()}</span>
             </p>            
           </a>
         </article>
