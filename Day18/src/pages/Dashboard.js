@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Spinner from '../components/Spinner/Spinner';
 import uuid from 'react-uuid';
 
+const proxy = 'http://localhost:8080/';
 
 const Dashboard = () => {
   const [isLoading, setisLoading] = useState(true);
@@ -9,9 +10,9 @@ const Dashboard = () => {
   const [searchInput, setsearchInput] = useState('');
   const [feedError, setFeedError] = useState(null);
 
-  const url = `https://newsapi.org/v2/top-headlines?country=ng&pageSize=100&apiKey=7e880dff532742e38183bea3a25100bb`;
+  const url = `${proxy}https://newsapi.org/v2/top-headlines?country=ng&pageSize=100&apiKey=7e880dff532742e38183bea3a25100bb`;
 
-  const searchUrl = `https://newsapi.org/v2/everything?q=${searchInput}&pageSize=100&apiKey=7e880dff532742e38183bea3a25100bb`;
+  const searchUrl = `${proxy}https://newsapi.org/v2/everything?q=${searchInput}&pageSize=100&apiKey=7e880dff532742e38183bea3a25100bb`;
 
 
   const handleFormSubmit = async e => {
