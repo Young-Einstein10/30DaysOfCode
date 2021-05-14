@@ -1,97 +1,113 @@
-import React, { useEffect, useState } from 'react';
-import Spinner from '../components/Spinner/Spinner';
-import uuid from 'react-uuid';
-
-const proxy = 'http://localhost:8080/';
+import React, { useEffect, useState } from "react";
+import Spinner from "../components/Spinner/Spinner";
+import uuid from "react-uuid";
 
 const Dashboard = () => {
   const [isLoading, setisLoading] = useState(true);
   const [feeds, setFeeds] = useState([]);
-  const [searchInput, setsearchInput] = useState('');
+  const [searchInput, setsearchInput] = useState("");
   const [feedError, setFeedError] = useState(null);
 
-  const url = `${proxy}https://newsapi.org/v2/top-headlines?country=ng&pageSize=100&apiKey=7e880dff532742e38183bea3a25100bb`;
+  const url = `https://newsapi.org/v2/top-headlines?country=ng&pageSize=100&apiKey=7e880dff532742e38183bea3a25100bb`;
 
-  const searchUrl = `${proxy}https://newsapi.org/v2/everything?q=${searchInput}&pageSize=100&apiKey=7e880dff532742e38183bea3a25100bb`;
+  const searchUrl = `https://newsapi.org/v2/everything?q=${searchInput}&pageSize=100&apiKey=7e880dff532742e38183bea3a25100bb`;
 
-
-  const handleFormSubmit = async e => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    setisLoading(true)
+    setisLoading(true);
     try {
       const response = await fetch(searchUrl);
-      const data = await response.json()
+      const data = await response.json();
       console.log(data);
-      if (data.status === 'ok') {
-          setisLoading(false)
-          setsearchInput('');
-          setFeeds(data.articles)
-        } else if (data.status === 'error') {
-          setisLoading(false);
-          setsearchInput('');
-          setFeedError(data.message)
-        }
+      if (data.status === "ok") {
+        setisLoading(false);
+        setsearchInput("");
+        setFeeds(data.articles);
+      } else if (data.status === "error") {
+        setisLoading(false);
+        setsearchInput("");
+        setFeedError(data.message);
+      }
     } catch (error) {
-      console.log(error)
+      console.log(error);
       setisLoading(false);
-      setsearchInput('');
+      setsearchInput("");
       setFeedError(error.message);
-
     }
-  }
+  };
 
   useEffect(() => {
     async function fetchData() {
       try {
         const response = await fetch(url);
-        const data = await response.json()
+        const data = await response.json();
         // console.log(data);
-        if (data.status === 'ok') {
-          setisLoading(false)
-          setFeeds(data.articles)
-        } else if (data.status === 'error') {
+        if (data.status === "ok") {
           setisLoading(false);
-          setFeedError(data.message)
+          setFeeds(data.articles);
+        } else if (data.status === "error") {
+          setisLoading(false);
+          setFeedError(data.message);
         }
       } catch (error) {
-        console.log(error)
+        console.log(error);
         setisLoading(false);
-        setFeedError(error.message)
+        setFeedError(error.message);
       }
     }
-    fetchData()
+    fetchData();
   }, [url]);
 
-    const FeedList = feeds.length !== 0 && (
+  const FeedList =
+    feeds.length !== 0 &&
     feeds.map((feed) => {
-      const { source: { name }, title, description, url, urlToImage, publishedAt, } = feed;
+      const {
+        source: { name },
+        title,
+        description,
+        url,
+        urlToImage,
+        publishedAt,
+      } = feed;
       return (
         <article className="article" key={uuid()}>
-          <a href={url} target="_blank" rel="noopener noreferrer" className="image col-5" style={{backgroundImage: `url(${urlToImage})`}}>{null}</a>
-          <a href={url} target="_blank" rel="noopener noreferrer" className="article-details col-7">
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="image col-5"
+            style={{ backgroundImage: `url(${urlToImage})` }}
+          >
+            {null}
+          </a>
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="article-details col-7"
+          >
             <h2>{title}</h2>
             <p>{description}</p>
             <p>
               <span>{name}</span>
               <span>{new Date(publishedAt).toLocaleString()}</span>
-            </p>            
+            </p>
           </a>
         </article>
-      )
-    })
-  );
+      );
+    });
 
   return (
     <div className="container">
       <form action="#" onSubmit={handleFormSubmit}>
         <label htmlFor="searchInput">
           Enter a Topic to Search:
-          <input 
+          <input
             type="text"
             className=""
             value={searchInput}
             name="searchInput"
-            onChange={e => setsearchInput(e.target.value)}
+            onChange={(e) => setsearchInput(e.target.value)}
             required
           />
         </label>
@@ -106,7 +122,7 @@ const Dashboard = () => {
         Built by <a href="">Young-Einstein10</a>
       </footer> */}
     </div>
-  )
-}
+  );
+};
 
 export default Dashboard;
